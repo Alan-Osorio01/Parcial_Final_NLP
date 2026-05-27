@@ -1,8 +1,25 @@
-data/
-output/
-data/chroma_db/
 __pycache__/
 *.pyc
 .env
 *.egg-info/
 .venv/
+.claude/
+
+# Datos generados (grandes, no van en git)
+data/chroma_db/
+data/fastembed_cache/
+data/chunks_*.json
+
+# Imágenes OCR (muchas, se regeneran con el pipeline)
+output/images/
+
+# Zips de transferencia (grandes, se regeneran)
+*.zip
+
+# PDFs originales (grandes, repositorio solo tiene el código y los .md)
+"Documentos - Parcial final/"
+Documentos*/
+CORONA/
+
+# Los .md SÍ van en git (son el entregable principal)
+# output/markdown/ — no ignorar
