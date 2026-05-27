@@ -1,0 +1,31 @@
+# PDF parsing y extracción estructural
+pymupdf>=1.24.0
+pdfplumber>=0.11.0
+
+# OCR de imágenes incrustadas
+pytesseract>=0.3.13
+Pillow>=10.0.0
+
+# Embeddings locales (ONNX, sin PyTorch)
+fastembed>=0.3.0
+
+# Vector store persistente
+chromadb>=0.5.0
+
+# BM25 para búsqueda híbrida
+rank-bm25>=0.2.2
+
+# LLM local via Ollama
+ollama>=0.3.0
+
+# Evaluación y análisis
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Notebook / demo
+jupyter>=1.0.0
+notebook>=7.0.0
+ipykernel>=6.0.0
+
+# Utilidades
+python-dotenv>=1.0.0
