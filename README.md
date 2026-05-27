@@ -1,155 +1,197 @@
-# RAG – Fichas de Datos de Seguridad
+# RAG – Fichas de Datos de Seguridad CORONA
 
-Sistema RAG (Recuperación Aumentada por Generación) para consulta de Fichas de Datos de Seguridad (FDS) de fabricantes de pinturas.  
-Parcial Final – NLP – Semestre 8.
+Sistema de Recuperación Aumentada por Generación (RAG) para consulta de Fichas de Datos de Seguridad (FDS) del fabricante CORONA. Permite hacer preguntas en lenguaje natural sobre 17 documentos FDS y recibir respuestas con citas de sección y página. Funciona completamente de forma local, sin APIs de pago ni conexión a internet.
 
-## Fabricante asignado
+**Parcial Final — Procesamiento de Lenguaje Natural**
+**Universidad Sergio Arboleda**
+**Alan Osorio · Santiago Díaz · Juan Camilo Gallardo**
 
-**CORONA** — 17 documentos FDS indexados (1212 chunks)
+---
 
-## Arquitectura
+## Arquitectura general
 
 ```mermaid
-flowchart TD
-    A[PDFs FDS] --> B[Parser - Docling/PyMuPDF]
-    A --> C[OCR Imágenes - Tesseract]
-    B --> D[Detector 16 Secciones GHS]
-    C --> E[Notas de Trazabilidad]
-    D --> F[md_writer.py]
-    E --> F
-    F --> G[.md por documento]
-    G --> H[Chunker por sección]
-    H --> I[Embeddings locales - fastembed ONNX]
-    I --> J[ChromaDB local]
-    K[Query usuario] --> L[Retriever híbrido BM25 + denso]
-    J --> L
-    L --> M[LLM local - Ollama qwen2.5]
-    M --> N[Respuesta + citas sección/página]
+flowchart LR
+    subgraph OFFLINE["Pipeline offline (una vez)"]
+        A[17 PDFs FDS\nCORONA] --> B[PyMuPDF\npdfplumber]
+        B --> C[Tesseract OCR\nimágenes]
+        B --> D[17 archivos .md\n16 secciones GHS]
+        C --> D
+        D --> E[Chunker GHS\n1212 chunks]
+        E --> F[fastembed ONNX\nChromaDB]
+        E --> G[rank-bm25\nÍndice JSON]
+    end
+
+    subgraph ONLINE["Pipeline online (consulta)"]
+        H[Consulta\nusuario] --> I[Dense retrieval\nChromaDB coseno]
+        H --> J[Sparse retrieval\nBM25]
+        I --> K[RRF k=60\nTop-7 chunks]
+        J --> K
+        K --> L[Ollama\nqwen2.5:7b]
+        L --> M[Respuesta\nFDS 88 §8 p.4]
+    end
+
+    F --> I
+    G --> J
 ```
+
+---
+
+## Stack tecnológico
+
+| Componente | Herramienta | Motivo |
+|---|---|---|
+| Extracción texto | PyMuPDF | Preserva jerarquía de fuentes (bold/size) |
+| Extracción tablas | pdfplumber | Detección de celdas en PDF |
+| OCR imágenes | Tesseract + Pillow | Trazabilidad de pictogramas GHS |
+| Embeddings | fastembed ONNX | Sin PyTorch, ~241 MB, multilingüe |
+| Vector store | ChromaDB (HNSW) | Persistente, SQLite, similitud coseno |
+| Búsqueda léxica | rank-bm25 | Términos exactos: CAS, H-codes |
+| Fusión | RRF (k=60) | Combina rankings sin problema de escala |
+| LLM | Ollama qwen2.5:7b | Local, mejor español técnico, T=0.1 |
+
+---
 
 ## Instalación
 
 ```bash
-# 1. Clonar e instalar dependencias
+# 1. Clonar e instalar dependencias Python
 pip install -r requirements.txt
 
 # 2. Instalar Tesseract (OCR)
 sudo apt install tesseract-ocr tesseract-ocr-spa
 
-# 3. Instalar Ollama y modelo LLM
+# 3. Instalar Ollama y descargar modelo
 curl -fsSL https://ollama.ai/install.sh | sh
 ollama pull qwen2.5:7b
 ```
 
+---
+
 ## Uso
 
 ```bash
-# Convertir PDFs a Markdown
-python src/pipeline/run_pipeline.py --input data/ --output output/markdown/
+# Convertir PDFs a Markdown estructurado
+python src/pipeline/run_pipeline.py \
+    --input CORONA/ \
+    --fabricante CORONA \
+    --output output/markdown/
 
-# Indexar documentos en ChromaDB
-python src/rag/index.py
+# Indexar chunks en ChromaDB + BM25
+python src/rag/index.py --fabricante CORONA
 
-# Consultar el sistema RAG
-python src/rag/query_cli.py
+# Consultar el sistema RAG (CLI interactivo)
+python src/rag/query_cli.py --fabricante CORONA
 
-# Correr evaluación vs. ground truth
-python src/eval/metrics.py
+# Evaluación cuantitativa (requiere Ollama activo)
+python src/eval/metrics.py --fabricante CORONA --gt eval/ground_truth.json
 ```
 
-## Estructura del proyecto
+---
+
+## Estructura del repositorio
 
 ```
 Parcial_Final_NLP/
+│
 ├── README.md
+├── requirements.txt
 ├── .gitignore
+│
 ├── src/
-│   ├── pipeline/        # PDF → MD (Santiago)
-│   │   ├── parser.py
-│   │   ├── sections.py
-│   │   ├── tables.py
-│   │   ├── ocr.py        # (Alan)
-│   │   └── md_writer.py
-│   ├── rag/             # Indexación + consulta (Alan)
-│   │   ├── chunker.py
-│   │   ├── embedder.py
-│   │   ├── vectorstore.py
-│   │   ├── retriever.py
-│   │   ├── generator.py
-│   │   └── query_cli.py
-│   └── eval/            # Evaluación (Juan)
-│       ├── ground_truth.py
-│       └── metrics.py
-├── data/                # PDFs originales (no versionado)
+│   ├── pipeline/               # PDF → Markdown (Santiago Díaz)
+│   │   ├── parser.py           # Extracción texto con PyMuPDF
+│   │   ├── sections.py         # Detección 16 secciones GHS
+│   │   ├── tables.py           # Extracción tablas con pdfplumber
+│   │   ├── ocr.py              # OCR imágenes + notas trazabilidad
+│   │   ├── md_writer.py        # Ensamblaje final .md
+│   │   └── run_pipeline.py     # Orquestador del pipeline
+│   │
+│   ├── rag/                    # Indexación y consulta (Alan Osorio)
+│   │   ├── chunker.py          # Chunking por sección GHS
+│   │   ├── embedder.py         # fastembed ONNX (384 dims)
+│   │   ├── vectorstore.py      # ChromaDB persistente
+│   │   ├── retriever.py        # Búsqueda híbrida BM25 + densa + RRF
+│   │   ├── generator.py        # Generación con Ollama qwen2.5:7b
+│   │   ├── index.py            # Indexación batch de chunks
+│   │   └── query_cli.py        # Interfaz CLI
+│   │
+│   └── eval/                   # Evaluación (Juan Camilo Gallardo)
+│       ├── metrics.py          # Similitud semántica, trazabilidad, cobertura
+│       └── ground_truth.py     # Utilidades para cargar el GT
+│
+├── eval/
+│   ├── ground_truth.json       # 35 pares Q-A (factual/técnica/multi_doc/trazab.)
+│   ├── results.csv             # Resultados: trazabilidad 74.3%, cobertura 74.3%
+│   └── sample_queries.txt      # 4 respuestas reales del RAG (Colab T4)
+│
 ├── output/
-│   ├── markdown/        # .md generados
-│   │   └── images/          # imágenes extraídas (no versionado)
+│   └── markdown/               # 17 FDS CORONA convertidos a .md
+│       └── FDS XX - *.md
+│
 ├── notebooks/
-│   └── demo.ipynb       # Demo funcional (Juan)
+│   ├── demo.ipynb              # Demo funcional con outputs
+│   └── RAG_CORONA.ipynb        # Notebook de Colab con ejecución completa
+│
 ├── docs/
-│   ├── alan.md          # Asignación Alan
-│   ├── santiago.md      # Asignación Santiago
-│   ├── juan.md          # Asignación Juan
-│   ├── pipeline.md
-│   ├── architecture.md
-│   ├── informe.md
-│   └── errores_extraccion.md
-└── eval/
-    ├── ground_truth.json
-    └── results.csv
+│   ├── informe.md              # Informe técnico (decisiones, resultados, límites)
+│   ├── pipeline.md             # Documentación del pipeline de extracción
+│   ├── errores_extraccion.md   # 5 anomalías documentadas del OCR/extracción
+│   ├── explicacion_sistema.md  # Guía completa del sistema para sustentación
+│   ├── arquitectura/
+│   │   ├── architecture.md     # Descripción de componentes
+│   │   └── architecture.drawio # Diagrama editable (draw.io)
+│   ├── documentos/
+│   │   ├── Informe_Sistema_RAG_FDS_CORONA.pdf
+│   │   └── Documentacion_Pipeline_Extraccion.pdf
+│   ├── equipo/
+│   │   ├── alan.md             # Contribución Alan Osorio
+│   │   ├── santiago.md         # Contribución Santiago Díaz
+│   │   └── juan.md             # Contribución Juan Camilo Gallardo
+│   └── Indicaciones/
+│       └── RAG_FDS.pdf         # Enunciado del parcial
+│
+└── data/                       # Generado localmente (no versionado)
+    ├── chroma_db/              # Índice vectorial ChromaDB
+    ├── chunks_corona.json      # Chunks serializados para BM25
+    └── fastembed_cache/        # Modelo ONNX descargado
 ```
 
-## Ejemplo de documento convertido a Markdown
+---
 
-El pipeline convierte cada PDF FDS a un `.md` estructurado con las 16 secciones GHS, tablas y notas de trazabilidad OCR. Ejemplo de extracto de [`output/markdown/FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.md`](output/markdown/FDS%2094%20-%20ESMALTE%20METAL%20MASTER%20PREMIUM%20-%20CORONA.md):
+## Resultados de evaluación
 
-```markdown
-## SECCIÓN 2: Identificación de peligros
+Evaluación sobre 35 pares del ground truth (`eval/ground_truth.json`):
 
-Liq. Infl. 3: Líquidos inflamables, Categoría 3, H226
-Carc. 1B: Carcinogenicidad, Categoría 1B, H350
-Muta. 1B: Mutagenicidad en células germinales, Categoría 1B, H340
+| Tipo | N | Trazabilidad sección | Cobertura documento |
+|---|---|---|---|
+| Factual | 12 | 75.0% | **100%** |
+| Técnica | 9 | 77.8% | 88.9% |
+| Multi-documento | 5 | **100%** | 40.0% |
+| Trazabilidad | 9 | 55.6% | 44.4% |
+| **GLOBAL** | **35** | **74.3%** | **74.3%** |
 
-## SECCIÓN 9: Propiedades físicas y químicas
+La similitud semántica coseno entre respuestas RAG y referencia se ejecutó en Google Colab T4. Ver `eval/sample_queries.txt` para 4 respuestas reales comparadas contra referencia.
 
-| Propiedad | Valor |
-|-----------|-------|
-| Estado físico | Líquido |
-| Punto de inflamación | 60 ºC |
-| Temperatura de auto-inflamación | 200 ºC |
-| Densidad a 20 ºC | (ver ficha técnica) |
-
-![imagen_p5](../output/images/FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA_p5_1.png)
-
-> *Nota de trazabilidad: La información asociada a esta figura se encuentra
-> en la Sección 9: PROPIEDADES FÍSICAS Y QUÍMICAS Y CARACTERÍSTICAS DE SEGURIDAD.*
-```
-
-Los 17 archivos `.md` generados están en [`output/markdown/`](output/markdown/).
+---
 
 ## Estado del sistema
 
 | Componente | Estado | Detalle |
 |---|---|---|
-| Pipeline PDF→MD | ✅ Completo | 17/17 FDS, 626 imágenes OCR |
-| Chunking | ✅ Completo | 1212 chunks (767 texto + 445 tabla) |
-| Embeddings + ChromaDB | ✅ Indexado | paraphrase-multilingual-MiniLM-L12-v2 |
-| Retriever híbrido | ✅ Operativo | BM25 + coseno + RRF |
-| LLM (Ollama qwen2.5:7b) | ⚠️ Requiere instalación | `ollama pull qwen2.5:7b` |
-| Evaluación (35 pares) | ⚠️ Requiere Ollama | `python src/eval/metrics.py` |
+| Pipeline PDF → MD | Completo | 17/17 FDS convertidos |
+| Chunking GHS | Completo | 1212 chunks (767 texto + 445 tabla) |
+| ChromaDB indexado | Listo | fastembed ONNX, similitud coseno, HNSW |
+| Retriever híbrido | Operativo | BM25 + embeddings + RRF |
+| LLM local | Requiere Ollama | `ollama pull qwen2.5:7b` (~4.7 GB) |
+| Evaluación completa | Requiere GPU | ~2 min/pregunta en CPU sin GPU dedicada |
+
+---
 
 ## División del trabajo
 
 | Persona | Responsabilidad | Archivos clave |
-|---------|----------------|---------------|
-| **Santiago** | Pipeline PDF→MD, 16 secciones, tablas | `src/pipeline/` |
-| **Alan** | OCR imágenes, trazabilidad, RAG core | `src/pipeline/ocr.py`, `src/rag/` |
-| **Juan** | Ground truth, evaluación, docs, demo | `src/eval/`, `docs/`, `notebooks/` |
-
-Ver asignación detallada en `docs/alan.md`, `docs/santiago.md`, `docs/juan.md`.
-
-## Equipo
-
-- Alan Osorio
-- Santiago
-- Juan
+|---|---|---|
+| **Santiago Díaz** | Pipeline PDF → Markdown, detección secciones GHS, tablas | `src/pipeline/` |
+| **Alan Osorio** | OCR y trazabilidad, sistema RAG completo, indexación | `src/pipeline/ocr.py`, `src/rag/` |
+| **Juan Camilo Gallardo** | Ground truth, evaluación cuantitativa, demo notebook | `src/eval/`, `notebooks/`, `eval/` |
