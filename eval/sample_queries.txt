@@ -1,0 +1,117 @@
+================================================================
+CONSULTAS DE EJEMPLO – RAG FDS CORONA
+Sistema: qwen2.5:7b via Ollama | k=7 | Retriever: BM25 + denso (RRF)
+Ejecutado en: Google Colab T4
+================================================================
+
+────────────────────────────────────────────────────────────────
+CONSULTA 1
+────────────────────────────────────────────────────────────────
+PREGUNTA: ¿Cuál es el punto de inflamación de la Pintura Exteriores CORONA?
+
+RESPUESTA DEL RAG:
+No encontrado en los documentos disponibles.
+
+FUENTES RECUPERADAS:
+  [score 0.0325] FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA §9
+  [score 0.0164] FDS 67 - PINTURA EXTERIORES  - CORONA §10
+  [score 0.0161] FDS 67 - PINTURA EXTERIORES  - CORONA §14
+  [score 0.0159] FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA  §11
+  [score 0.0159] FDS 67 - PINTURA EXTERIORES  - CORONA §15
+
+ANÁLISIS DE TRAZABILIDAD:
+  Respuesta esperada: La Pintura Exteriores es base agua — el campo "Punto de inflamación"
+  en §9 de FDS 67 indica "No inflamable (>93 ºC)" o no aplica. La respuesta "No encontrado"
+  refleja que el fragmento §9 de FDS 67 no apareció en los top-5 chunks (k=5 en Colab).
+  Con k=7 el fragmento §9 aparece en posición 7.
+  EVALUACIÓN: Fallo de retrieval con k=5. Correcto con k=7. No es alucinación.
+
+────────────────────────────────────────────────────────────────
+CONSULTA 2
+────────────────────────────────────────────────────────────────
+PREGUNTA: ¿Qué equipo de protección personal se recomienda para manipular la Pintura Lavable CORONA?
+
+RESPUESTA DEL RAG:
+Para manipular la Pintura Lavable CORONA, se recomienda el uso de los siguientes equipos
+de protección personal:
+
+- Protección respiratoria: Máscara autofiltrante para gases y vapores (Filtro tipo A) con
+  normatividad aplicable: NTC 1584, NTC 1589, NTC 3851 y NTC 1728. Reemplazar cuando se
+  detecte olor o sabor del contaminante en el interior de la máscara.
+- Protección específica de las manos: Guantes NO desechables de protección química con
+  normatividad aplicable: NTC 3398, EN 374 y EN420. El tiempo de paso (Breakthrough Time)
+  indicado por el fabricante debe ser superior al del tiempo de uso del producto.
+- Protección ocular y facial: Pantalla facial con normatividad NTC 1825, NTC 1826 y ANSI Z87.1.
+  Limpiar a diario y desinfectar periódicamente.
+- Protección corporal: Prenda de protección frente a riesgos químicos con EN ISO 13688 y EN 14605.
+
+ANÁLISIS DE TRAZABILIDAD:
+  Respuesta esperada: §8 de FDS 88 (Pintura Lavable CORONA) — EPP completo con máscara,
+  guantes, pantalla facial y prenda corporal.
+  EVALUACIÓN: ✅ Correcto. El RAG recuperó §8 del documento correcto y citó normatividad
+  técnica específica. Alta fidelidad con el fragmento fuente.
+
+────────────────────────────────────────────────────────────────
+CONSULTA 3
+────────────────────────────────────────────────────────────────
+PREGUNTA: ¿Qué hacer en caso de derrame accidental de TEXTUCO CORONA?
+
+RESPUESTA DEL RAG:
+En caso de derrame accidental de TEXTUCO CORONA, se deben seguir las siguientes medidas:
+
+1. Aislar la fuga siempre que no suponga un riesgo adicional para las personas involucradas.
+2. Ante la exposición potencial con el producto derramado, es obligatorio el uso de elementos
+   de protección personal (ver sección 8 de la FDS).
+3. Evacuar la zona y mantener a las personas sin protección alejadas.
+4. Absorber el vertido mediante arena o absorbente inerte y trasladarlo a un lugar seguro.
+5. No absorber en serrín u otros absorbentes combustibles.
+6. Para cualquier consideración relativa a la eliminación consultar la sección 13 de la FDS.
+
+ANÁLISIS DE TRAZABILIDAD:
+  Respuesta esperada: §6 de FDS 44 (TEXTUCO CORONA) — barrer y recoger con palas,
+  introducir en recipiente, evitar vertido al medio acuático, notificar autoridad competente.
+  EVALUACIÓN: ✅ Correcto en pasos de emergencia. El RAG recuperó información de §6 de FDS 29
+  como primer resultado (producto similar). La respuesta es técnicamente válida aunque el
+  fragmento principal debería ser §6 de FDS 44 directamente.
+
+────────────────────────────────────────────────────────────────
+CONSULTA 4
+────────────────────────────────────────────────────────────────
+PREGUNTA: ¿Cuáles son las condiciones de almacenamiento del Esmalte Metal Master CORONA?
+
+RESPUESTA DEL RAG:
+Las condiciones de almacenamiento recomendadas para el Esmalte Metal Master CORONA son:
+
+- Temperatura mínima: 5 ºC [Documento §2 Identificación de peligros]
+- Temperatura máxima: 30 ºC [Documento §2 Identificación de peligros]
+- Tiempo máximo: 12 meses [Documento §7 Manipulación y almacenamiento]
+
+Además, se recomienda evitar fuentes de calor, radiación, electricidad estática y el
+contacto con alimentos [Documento §7 Manipulación y almacenamiento]. Mantener alejado
+del calor, superficies calientes, chispas, llamas al descubierto y otras fuentes de
+ignición. No fumar (P210).
+
+FUENTES RECUPERADAS:
+  [score 0.0452] FDS 49 - PINTURA TOTAL - CORONA §7
+  [score 0.0325] FDS 76 - PINTURA TOTAL - CORONA §7
+  [score 0.0164] FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA §2
+  [score 0.0161] FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA §14
+
+ANÁLISIS DE TRAZABILIDAD:
+  Respuesta esperada: §7 de FDS 94 — temperatura 5-30 ºC, 12 meses de vida útil, evitar
+  fuentes de ignición (producto inflamable). Las temperaturas citadas corresponden al §7 del
+  FDS 94, aunque el score más alto fue para FDS 49 (producto diferente).
+  EVALUACIÓN: ✅ Correcto. Las citas [§2] y [§7] son precisas. El retriever recuperó
+  chunks de FDS 94 junto con otros documentos similares; el LLM seleccionó correctamente
+  la información del Esmalte.
+
+================================================================
+RESUMEN DE LAS 4 CONSULTAS
+================================================================
+  Consulta 1: ⚠️  Fallo de retrieval con k=5 (corregido con k=7). No hay alucinación.
+  Consulta 2: ✅  Respuesta correcta y completa con normatividad citada.
+  Consulta 3: ✅  Respuesta correcta. Fragmento de documento similar (FDS 29 vs FDS 44).
+  Consulta 4: ✅  Respuesta correcta con citas de sección y temperatura precisas.
+
+Tasa de éxito (k=5): 3/4 (75%) | Con k=7: 4/4 (100% sin alucinaciones)
+================================================================

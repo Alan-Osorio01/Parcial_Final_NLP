@@ -1,0 +1,317 @@
+[
+  {
+    "id": "q001",
+    "pregunta": "¿Cuál es el punto de inflamación de la Pintura Primera Mano & Acabado CORONA (FDS 29)?",
+    "respuesta_referencia": "No inflamable (>93 ºC). La temperatura de auto-inflamación es de 204 ºC.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q002",
+    "pregunta": "¿Cuál es la densidad a 20 ºC de la Pintura Primera Mano & Acabado CORONA (FDS 29)?",
+    "respuesta_referencia": "La densidad a 20 ºC es de 1371.4 kg/m³ (densidad relativa 1.371).",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q003",
+    "pregunta": "¿Cuál es el pH de la Pintura Primera Mano & Acabado CORONA (FDS 29)?",
+    "respuesta_referencia": "El pH es de 8.5 a 9.5.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q004",
+    "pregunta": "¿Cuál es la temperatura de ebullición de la Pintura Primera Mano & Acabado CORONA (FDS 29)?",
+    "respuesta_referencia": "La temperatura de ebullición a presión atmosférica es de 102 ºC.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q005",
+    "pregunta": "¿Cuál es el punto de inflamación del Esmalte Metal Master Premium CORONA (FDS 94)?",
+    "respuesta_referencia": "El punto de inflamación es de 60 ºC. La temperatura de auto-inflamación es de 200 ºC.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q006",
+    "pregunta": "¿Cuál es la densidad a 20 ºC de la Pintura COOLGUARD CORONA (FDS 92)?",
+    "respuesta_referencia": "La densidad a 20 ºC es de 1389.6 kg/m³ (densidad relativa 1.39).",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 92 - PINTURA COOLGUARD - CORONA.pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q007",
+    "pregunta": "¿Cuál es la temperatura de ebullición de la Pintura Lavable Antibacterial CORONA (FDS 42)?",
+    "respuesta_referencia": "La temperatura de ebullición a presión atmosférica es de 100 ºC.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q008",
+    "pregunta": "¿Cuál es el pH de la Pintura Lavable Antibacterial CORONA (FDS 42)?",
+    "respuesta_referencia": "El pH es de 8.5 a 9.5.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q009",
+    "pregunta": "¿Cuál es la clasificación NFPA de la Pintura Lavable Antibacterial CORONA (FDS 42)?",
+    "respuesta_referencia": "Salud: 1, Inflamabilidad: 0, Inestabilidad: 0, Especiales: No relevante.",
+    "seccion_fuente": "Sección 2 – Identificación de peligros",
+    "pagina_fuente": 1,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q010",
+    "pregunta": "¿Cuál es la temperatura mínima de almacenamiento del Textuco CORONA (FDS 44)?",
+    "respuesta_referencia": "La temperatura mínima de almacenamiento es de 5 ºC.",
+    "seccion_fuente": "Sección 7 – Manipulación y almacenamiento",
+    "pagina_fuente": 3,
+    "documento": "FDS 44 - TEXTUCO - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q011",
+    "pregunta": "¿Cuál es el número ONU de la Pintura Superlavable Zero CORONA (FDS 68) para transporte?",
+    "respuesta_referencia": "El número ONU es UN3082, designación oficial: SUSTANCIA LÍQUIDA PELIGROSA PARA EL MEDIO AMBIENTE, N.E.P. Clase de transporte 9, Grupo de embalaje III.",
+    "seccion_fuente": "Sección 14 – Información sobre el transporte",
+    "pagina_fuente": 8,
+    "documento": "FDS 68 - PINTURA SUPERLAVABLE ZERO - CORONA.pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q012",
+    "pregunta": "¿Cuáles son los principales componentes de la Pintura Lavable Antibacterial CORONA (FDS 42)?",
+    "respuesta_referencia": "Los principales componentes son: Agua (25 - <50 %), Dióxido de titanio (10 - <25 %), Copolímero de etileno-acetato de vinilo (10 - <25 %), Piedra caliza (10 - <25 %), Caolín (2.5 - <10 %) y Caolín calcinado (2.5 - <10 %).",
+    "seccion_fuente": "Sección 3 – Composición / información sobre los componentes",
+    "pagina_fuente": 2,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "factual"
+  },
+  {
+    "id": "q013",
+    "pregunta": "¿Qué equipo de protección personal (EPP) se debe usar al manipular la Pintura Primera Mano & Acabado CORONA (FDS 29)?",
+    "respuesta_referencia": "Se debe usar: máscara autofiltrante para gases y vapores (protección respiratoria), guantes NO desechables de protección química, pantalla facial (protección ocular), prenda de protección frente a riesgos químicos (protección corporal) y calzado de seguridad contra riesgo químico.",
+    "seccion_fuente": "Sección 8 – Controles de exposición / protección personal",
+    "pagina_fuente": 4,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q014",
+    "pregunta": "¿Qué agentes extintores se deben usar en caso de incendio con el Textuco CORONA (FDS 44)?",
+    "respuesta_referencia": "Se deben emplear preferentemente extintores de polvo polivalente (polvo ABC), alternativamente espuma física o extintores de dióxido de carbono (CO2). NO se recomienda emplear agua a chorro.",
+    "seccion_fuente": "Sección 5 – Medidas de lucha contra incendios",
+    "pagina_fuente": 2,
+    "documento": "FDS 44 - TEXTUCO - CORONA .pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q015",
+    "pregunta": "¿Qué se debe hacer en caso de vertido accidental de la Pintura Lavable Antibacterial CORONA (FDS 42)?",
+    "respuesta_referencia": "Barrer y recoger el producto con palas u otros medios e introducirlo en un recipiente para su reutilización (preferentemente) o su eliminación. Evitar a toda costa cualquier tipo de vertido al medio acuático. Contener adecuadamente el producto absorbido/recogido en recipientes herméticamente precintables. Notificar a la autoridad competente en caso de exposición al público o al medioambiente.",
+    "seccion_fuente": "Sección 6 – Medidas en caso de vertido accidental",
+    "pagina_fuente": 3,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q016",
+    "pregunta": "¿Cuáles son las medidas de almacenamiento seguro del Textuco CORONA (FDS 44)?",
+    "respuesta_referencia": "Temperatura mínima de almacenamiento: 5 ºC. Mantener los recipientes herméticamente cerrados. El producto no presenta riesgo de incendio bajo condiciones normales. No comer, beber ni fumar en las zonas de trabajo. Lavarse las manos después de cada utilización.",
+    "seccion_fuente": "Sección 7 – Manipulación y almacenamiento",
+    "pagina_fuente": 3,
+    "documento": "FDS 44 - TEXTUCO - CORONA .pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q017",
+    "pregunta": "¿Qué primeros auxilios se deben aplicar en caso de contacto ocular con la Pintura Lavable Antibacterial CORONA (FDS 42)?",
+    "respuesta_referencia": "Enjuagar durante al menos 15 minutos con abundante agua a temperatura ambiente, evitando que el afectado se frote o cierre los ojos. Si los síntomas persisten, acudir a consulta médica.",
+    "seccion_fuente": "Sección 4 – Primeros auxilios",
+    "pagina_fuente": 2,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q018",
+    "pregunta": "¿Qué precauciones especiales exige el Esmalte Metal Master Premium CORONA (FDS 94) para prevenir incendios?",
+    "respuesta_referencia": "Mantener alejado del calor, superficies calientes, chispas, llamas al descubierto y otras fuentes de ignición (P210). Evitar la formación de mezclas vapor-aire inflamables mediante ventilación o agente inertizante. Eliminar cargas electrostáticas conectando todas las superficies conductoras a tierra.",
+    "seccion_fuente": "Sección 6 – Medidas en caso de vertido accidental",
+    "pagina_fuente": 3,
+    "documento": "FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q019",
+    "pregunta": "¿Cuál es el método de eliminación de residuos recomendado para los productos CORONA?",
+    "respuesta_referencia": "Eliminar el contenido/recipiente mediante el sistema de recogida selectiva habilitado en el municipio (P501). Controlar los derrames y residuos eliminándolos con métodos seguros según la sección 6 de la FDS.",
+    "seccion_fuente": "Sección 13 – Consideraciones relativas a la eliminación",
+    "pagina_fuente": 8,
+    "documento": "FDS 44 - TEXTUCO - CORONA .pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q020",
+    "pregunta": "¿Qué clasificación SGA tiene el Esmalte Metal Master Premium CORONA (FDS 94) respecto a carcinogenicidad?",
+    "respuesta_referencia": "Carcinogenicidad Categoría 1B (H350): Puede provocar cáncer.",
+    "seccion_fuente": "Sección 2 – Identificación de peligros",
+    "pagina_fuente": 1,
+    "documento": "FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q021",
+    "pregunta": "¿Qué medidas de protección del medio ambiente se deben tomar durante un vertido de la Pintura Superlavable Zero CORONA (FDS 68)?",
+    "respuesta_referencia": "Evitar a toda costa cualquier tipo de vertido al medio acuático. Contener adecuadamente el producto absorbido/recogido en recipientes herméticamente precintables. Notificar a la autoridad competente en el caso de exposición al público en general o al medioambiente.",
+    "seccion_fuente": "Sección 6 – Medidas en caso de vertido accidental",
+    "pagina_fuente": 3,
+    "documento": "FDS 68 - PINTURA SUPERLAVABLE ZERO - CORONA.pdf",
+    "tipo": "tecnica"
+  },
+  {
+    "id": "q022",
+    "pregunta": "¿En qué sección de la FDS se especifican las propiedades físicas y químicas como densidad y pH?",
+    "respuesta_referencia": "En la Sección 9: Propiedades físicas y químicas y características de seguridad.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q023",
+    "pregunta": "¿En qué sección se encuentran los límites de exposición profesional (TLV) de la Pintura Primera Mano & Acabado CORONA?",
+    "respuesta_referencia": "En la Sección 8: Controles de exposición / protección personal. El TLV-TWA para dióxido de titanio es de 10 mg/m³ según ACGIH.",
+    "seccion_fuente": "Sección 8 – Controles de exposición / protección personal",
+    "pagina_fuente": 4,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q024",
+    "pregunta": "¿En qué sección se describe la composición química de los productos CORONA?",
+    "respuesta_referencia": "En la Sección 3: Composición / información sobre los componentes. Incluye identificación CAS, nombre químico y concentración de cada componente.",
+    "seccion_fuente": "Sección 3 – Composición / información sobre los componentes",
+    "pagina_fuente": 2,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q025",
+    "pregunta": "¿En qué sección se indica la información de transporte (número ONU) de la Pintura Superlavable Zero CORONA?",
+    "respuesta_referencia": "En la Sección 14: Información relativa al transporte. Contiene el número ONU, clase de transporte, grupo de embalaje y designación oficial.",
+    "seccion_fuente": "Sección 14 – Información sobre el transporte",
+    "pagina_fuente": 8,
+    "documento": "FDS 68 - PINTURA SUPERLAVABLE ZERO - CORONA.pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q026",
+    "pregunta": "¿En qué sección y página se especifican los medios de extinción del incendio para el Textuco CORONA?",
+    "respuesta_referencia": "En la Sección 5: Medidas de lucha contra incendios, página 2.",
+    "seccion_fuente": "Sección 5 – Medidas de lucha contra incendios",
+    "pagina_fuente": 2,
+    "documento": "FDS 44 - TEXTUCO - CORONA .pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q027",
+    "pregunta": "¿En qué sección se detallan los primeros auxilios para los productos CORONA?",
+    "respuesta_referencia": "En la Sección 4: Primeros auxilios. Incluye instrucciones para inhalación, contacto con piel, contacto con ojos e ingestión/aspiración.",
+    "seccion_fuente": "Sección 4 – Primeros auxilios",
+    "pagina_fuente": 2,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q028",
+    "pregunta": "¿En qué sección se encuentran las indicaciones de peligro SGA (H-statements) del Esmalte Metal Master Premium CORONA?",
+    "respuesta_referencia": "En la Sección 2: Identificación de peligros. Las indicaciones incluyen H226 (líquido inflamable), H350 (carcinogénico), H340 (mutágeno), H317 (sensibilizante cutáneo) y H304 (peligro por aspiración).",
+    "seccion_fuente": "Sección 2 – Identificación de peligros",
+    "pagina_fuente": 1,
+    "documento": "FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q029",
+    "pregunta": "¿En qué sección de la FDS se explica cómo eliminar residuos y envases de forma segura?",
+    "respuesta_referencia": "En la Sección 13: Consideraciones relativas a la eliminación. Se indica usar el sistema de recogida selectiva habilitado en el municipio (código P501).",
+    "seccion_fuente": "Sección 13 – Consideraciones relativas a la eliminación",
+    "pagina_fuente": 8,
+    "documento": "FDS 44 - TEXTUCO - CORONA .pdf",
+    "tipo": "trazabilidad"
+  },
+  {
+    "id": "q030",
+    "pregunta": "¿El Esmalte Metal Master Premium CORONA (FDS 94) es más peligroso en cuanto a inflamabilidad que las pinturas al agua CORONA como la FDS 29?",
+    "respuesta_referencia": "Sí. El Esmalte Metal Master Premium (FDS 94) tiene un punto de inflamación de 60 ºC y se clasifica como líquido inflamable Categoría 3 (H226), mientras que la Pintura Primera Mano & Acabado (FDS 29) es No inflamable (>93 ºC). La base al agua hace que pinturas como FDS 29, 42, 44, 68 y 92 no sean inflamables en condiciones normales.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.pdf",
+    "tipo": "multi_documento"
+  },
+  {
+    "id": "q031",
+    "pregunta": "¿Cuáles de los productos CORONA son peligrosos para el medio ambiente acuático según su clasificación SGA?",
+    "respuesta_referencia": "La Pintura Lavable Antibacterial (FDS 42) tiene clasificación Acuático agudo 2 (H401) y Acuático crónico 3 (H412). La Pintura Superlavable Zero (FDS 68) también presenta riesgos ambientales (número ONU UN3082). El Esmalte Metal Master Premium (FDS 94) tiene clasificación Acuático agudo 3 (H402) y Acuático crónico 3 (H412).",
+    "seccion_fuente": "Sección 2 – Identificación de peligros",
+    "pagina_fuente": 1,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "multi_documento"
+  },
+  {
+    "id": "q032",
+    "pregunta": "¿Qué diferencia de densidad existe entre la Pintura Primera Mano & Acabado (FDS 29) y la Pintura COOLGUARD (FDS 92)?",
+    "respuesta_referencia": "La Pintura Primera Mano & Acabado (FDS 29) tiene una densidad de 1371.4 kg/m³, mientras que la Pintura COOLGUARD (FDS 92) tiene una densidad de 1389.6 kg/m³. La diferencia es de 18.2 kg/m³, siendo CoolGuard ligeramente más densa.",
+    "seccion_fuente": "Sección 9 – Propiedades físicas y químicas",
+    "pagina_fuente": 5,
+    "documento": "FDS 92 - PINTURA COOLGUARD - CORONA.pdf",
+    "tipo": "multi_documento"
+  },
+  {
+    "id": "q033",
+    "pregunta": "¿Cuáles productos CORONA requieren protección respiratoria según la sección 8 de sus FDS?",
+    "respuesta_referencia": "La Pintura Primera Mano & Acabado (FDS 29) requiere máscara autofiltrante para gases y vapores. El Esmalte Metal Master Premium (FDS 94), al ser un líquido inflamable con vapores peligrosos, también requiere protección respiratoria. Las pinturas al agua de bajo riesgo pueden requerir solo protección básica.",
+    "seccion_fuente": "Sección 8 – Controles de exposición / protección personal",
+    "pagina_fuente": 4,
+    "documento": "FDS 29 - PINTURA PRIMERA MANO & ACABADO - CORONA .pdf",
+    "tipo": "multi_documento"
+  },
+  {
+    "id": "q034",
+    "pregunta": "¿Qué productos CORONA tienen componentes con clasificación carcinogénica (Carc.) en sus fichas?",
+    "respuesta_referencia": "La Pintura Lavable Antibacterial (FDS 42) contiene Dióxido de titanio clasificado como Carc. 2 (H351 - Atención, sospechoso de provocar cáncer). El Esmalte Metal Master Premium (FDS 94) presenta Carcinogenicidad Categoría 1B (H350 - Peligro, puede provocar cáncer). La Categoría 1B indica mayor nivel de evidencia que la Categoría 2.",
+    "seccion_fuente": "Sección 2 – Identificación de peligros",
+    "pagina_fuente": 1,
+    "documento": "FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.pdf",
+    "tipo": "multi_documento"
+  },
+  {
+    "id": "q035",
+    "pregunta": "¿Bajo qué normativa colombiana se clasificaron los productos CORONA en sus FDS?",
+    "respuesta_referencia": "Las FDS de CORONA se clasificaron conforme al Decreto 1496 de 2018 y la Resolución 773 de 2021, por los cuales Colombia adopta el Sistema Globalmente Armonizado (SGA) de Clasificación y Etiquetado de Productos Químicos.",
+    "seccion_fuente": "Sección 2 – Identificación de peligros",
+    "pagina_fuente": 1,
+    "documento": "FDS 42 - PINTURA LAVABLE ANTIBACTERIAL - CORONA .pdf",
+    "tipo": "trazabilidad"
+  }
+]
