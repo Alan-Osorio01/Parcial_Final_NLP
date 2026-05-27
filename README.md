@@ -5,7 +5,7 @@ Parcial Final – NLP – Semestre 8.
 
 ## Fabricante asignado
 
-> **⚠️ Confirmar grupo en Moodle** y actualizar esta línea con el fabricante correspondiente.
+**CORONA** — 17 documentos FDS indexados (1212 chunks)
 
 ## Arquitectura
 
@@ -19,7 +19,7 @@ flowchart TD
     E --> F
     F --> G[.md por documento]
     G --> H[Chunker por sección]
-    H --> I[Embeddings locales - BGE-M3]
+    H --> I[Embeddings locales - fastembed ONNX]
     I --> J[ChromaDB local]
     K[Query usuario] --> L[Retriever híbrido BM25 + denso]
     J --> L
@@ -83,7 +83,7 @@ Parcial_Final_NLP/
 ├── data/                # PDFs originales (no versionado)
 ├── output/
 │   ├── markdown/        # .md generados
-│   └/images/            # imágenes extraídas
+│   │   └── images/          # imágenes extraídas (no versionado)
 ├── notebooks/
 │   └── demo.ipynb       # Demo funcional (Juan)
 ├── docs/
@@ -98,6 +98,45 @@ Parcial_Final_NLP/
     ├── ground_truth.json
     └── results.csv
 ```
+
+## Ejemplo de documento convertido a Markdown
+
+El pipeline convierte cada PDF FDS a un `.md` estructurado con las 16 secciones GHS, tablas y notas de trazabilidad OCR. Ejemplo de extracto de [`output/markdown/FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA.md`](output/markdown/FDS%2094%20-%20ESMALTE%20METAL%20MASTER%20PREMIUM%20-%20CORONA.md):
+
+```markdown
+## SECCIÓN 2: Identificación de peligros
+
+Liq. Infl. 3: Líquidos inflamables, Categoría 3, H226
+Carc. 1B: Carcinogenicidad, Categoría 1B, H350
+Muta. 1B: Mutagenicidad en células germinales, Categoría 1B, H340
+
+## SECCIÓN 9: Propiedades físicas y químicas
+
+| Propiedad | Valor |
+|-----------|-------|
+| Estado físico | Líquido |
+| Punto de inflamación | 60 ºC |
+| Temperatura de auto-inflamación | 200 ºC |
+| Densidad a 20 ºC | (ver ficha técnica) |
+
+![imagen_p5](../output/images/FDS 94 - ESMALTE METAL MASTER PREMIUM - CORONA_p5_1.png)
+
+> *Nota de trazabilidad: La información asociada a esta figura se encuentra
+> en la Sección 9: PROPIEDADES FÍSICAS Y QUÍMICAS Y CARACTERÍSTICAS DE SEGURIDAD.*
+```
+
+Los 17 archivos `.md` generados están en [`output/markdown/`](output/markdown/).
+
+## Estado del sistema
+
+| Componente | Estado | Detalle |
+|---|---|---|
+| Pipeline PDF→MD | ✅ Completo | 17/17 FDS, 626 imágenes OCR |
+| Chunking | ✅ Completo | 1212 chunks (767 texto + 445 tabla) |
+| Embeddings + ChromaDB | ✅ Indexado | paraphrase-multilingual-MiniLM-L12-v2 |
+| Retriever híbrido | ✅ Operativo | BM25 + coseno + RRF |
+| LLM (Ollama qwen2.5:7b) | ⚠️ Requiere instalación | `ollama pull qwen2.5:7b` |
+| Evaluación (35 pares) | ⚠️ Requiere Ollama | `python src/eval/metrics.py` |
 
 ## División del trabajo
 

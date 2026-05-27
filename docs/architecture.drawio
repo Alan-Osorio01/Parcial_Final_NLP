@@ -1,0 +1,164 @@
+<mxfile host="65bd71144e">
+    <diagram id="rag-fds-corona" name="Arquitectura RAG FDS CORONA">
+        <mxGraphModel dx="1161" dy="562" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="Sistema RAG – Fichas de Datos de Seguridad CORONA" style="text;html=1;fontSize=18;fontStyle=1;align=center;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="20" width="740" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="label-offline" value="PIPELINE OFFLINE — Construcción del índice (ejecutado una vez)" style="text;html=1;fontSize=11;fontStyle=3;align=left;strokeColor=none;fillColor=none;fontColor=#0050ef;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="90" width="560" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="pdfs" value="17 FDS CORONA&#xa;(PDFs originales)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;fillColor=#f5f5f5;strokeColor=#555555;fontColor=#333333;fontStyle=1;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="120" width="140" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="extraction" value="&lt;b&gt;Extracción estructural&lt;/b&gt;&#xa;&#xa;PyMuPDF → texto + jerarquía&#xa;pdfplumber → tablas&#xa;Tesseract OCR → imágenes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="115" width="190" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="markdown" value="&lt;b&gt;17 archivos .md&lt;/b&gt;&#xa;&#xa;## SECCIÓN N: Título&#xa;Tablas + notas OCR&#xa;Trazabilidad imagen→sección" style="shape=document;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="460" y="115" width="180" height="125" as="geometry"/>
+                </mxCell>
+                <mxCell id="chunker" value="&lt;b&gt;Chunker GHS&lt;/b&gt;&#xa;&#xa;Límite: 16 secciones GHS&#xa;Texto: 800 pal · overlap 100&#xa;Tablas: unidad atómica&#xa;→ &lt;b&gt;1212 chunks&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="115" width="180" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="fastembed" value="&lt;b&gt;fastembed ONNX&lt;/b&gt;&#xa;paraphrase-multilingual-MiniLM-L12-v2&#xa;384 dimensiones · CPU · ~241 MB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="115" width="220" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="chromadb" value="&lt;b&gt;ChromaDB&lt;/b&gt;&#xa;HNSW · similitud coseno&#xa;SQLite persistente · 1212 vectores" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1200" y="110" width="180" height="75" as="geometry"/>
+                </mxCell>
+                <mxCell id="bm25" value="&lt;b&gt;rank-bm25&lt;/b&gt;&#xa;Índice invertido BM25&#xa;chunks_corona.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="200" width="220" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="bm25-store" value="BM25 Index&#xa;(en memoria)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1200" y="200" width="180" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="meta-note" value="Metadatos por chunk:&#xa;documento · seccion_num&#xa;seccion_titulo · pagina · tipo" style="shape=callout;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="235" width="190" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-pdfs-ext" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;" parent="1" source="pdfs" target="extraction" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-ext-md" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;" parent="1" source="extraction" target="markdown" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-md-chunk" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#6c8ebf;" parent="1" source="markdown" target="chunker" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-chunk-fe" value="vectorizar" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;dashed=1;fontSize=8;" parent="1" source="chunker" target="fastembed" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-chunk-bm25" value="indexar" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;dashed=1;fontSize=8;exitX=1;exitY=0.8;exitDx=0;exitDy=0;" parent="1" source="chunker" target="bm25" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-fe-chroma" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" parent="1" source="fastembed" target="chromadb" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="e-bm25-store" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" parent="1" source="bm25" target="bm25-store" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sep" style="endArrow=none;dashed=1;strokeColor=#AAAAAA;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="20" y="310"/>
+                            <mxPoint x="1430" y="310"/>
+                        </Array>
+                        <mxPoint x="20" y="310" as="sourcePoint"/>
+                        <mxPoint x="1430" y="310" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="label-online" value="PIPELINE ONLINE — Consulta en tiempo real" style="text;html=1;fontSize=11;fontStyle=3;align=left;strokeColor=none;fillColor=none;fontColor=#d6000d;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="320" width="460" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="user-q" value="&lt;b&gt;Consulta del usuario&lt;/b&gt;&#xa;(lenguaje natural, español)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="350" width="190" height="75" as="geometry"/>
+                </mxCell>
+                <mxCell id="dense-ret" value="&lt;b&gt;Dense retrieval&lt;/b&gt;&#xa;fastembed (embed query)&#xa;→ ChromaDB coseno&#xa;top-20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="345" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="sparse-ret" value="&lt;b&gt;Sparse retrieval&lt;/b&gt;&#xa;BM25 (términos exactos)&#xa;→ rank-bm25&#xa;top-20" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="445" width="170" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="rrf" value="&lt;b&gt;Reciprocal Rank Fusion&lt;/b&gt;&#xa;&#xa;score(d) = Σ 1/(k + rank(d))&#xa;k = 60 → Top-7 chunks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;fontStyle=0;" parent="1" vertex="1">
+                    <mxGeometry x="510" y="370" width="210" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="prompt" value="&lt;b&gt;Prompt template&lt;/b&gt;&#xa;Contexto (7 chunks)&#xa;Instrucción: citar [Doc §N, p.X]&#xa;T = 0.1 · num_predict=1024" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="780" y="360" width="200" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="llm" value="&lt;b&gt;Ollama – qwen2.5:7b&lt;/b&gt;&#xa;Inferencia local CPU&#xa;~4.7 GB · temperatura 0.1&#xa;Multilingüe (español técnico)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1040" y="355" width="200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="answer" value="&lt;b&gt;Respuesta con citas&lt;/b&gt;&#xa;&#xa;Texto + [FDS 88 §Sección 8, p.4]&#xa;Verificable en PDF original" style="shape=document;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="1300" y="360" width="190" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="q-dense" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;" parent="1" source="user-q" target="dense-ret" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="q-sparse" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d6b656;exitX=1;exitY=0.8;exitDx=0;exitDy=0;" parent="1" source="user-q" target="sparse-ret" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="dense-rrf" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" parent="1" source="dense-ret" target="rrf" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="sparse-rrf" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" parent="1" source="sparse-ret" target="rrf" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rrf-prompt" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" parent="1" source="rrf" target="prompt" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="prompt-llm" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#b85450;" parent="1" source="prompt" target="llm" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="llm-ans" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" parent="1" source="llm" target="answer" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="chroma-dense" value="consulta" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d6b656;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="chromadb" target="dense-ret" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1290" y="300"/>
+                            <mxPoint x="365" y="300"/>
+                            <mxPoint x="365" y="345"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="bm25store-sparse" value="consulta" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d6b656;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="bm25-store" target="sparse-ret" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="1290" y="295"/>
+                            <mxPoint x="365" y="295"/>
+                            <mxPoint x="365" y="445"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="sep2" style="endArrow=none;dashed=1;strokeColor=#AAAAAA;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="20" y="560" as="sourcePoint"/>
+                        <mxPoint x="1430" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="label-eval" value="EVALUACIÓN — Métricas cuantitativas sobre ground truth (35 pares Q-A)" style="text;html=1;fontSize=11;fontStyle=3;align=left;strokeColor=none;fillColor=none;fontColor=#9673a6;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="570" width="700" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="gt" value="&lt;b&gt;Ground Truth&lt;/b&gt;&#xa;eval/ground_truth.json&#xa;35 pares Q-A&#xa;factual (12) · técnica (9)&#xa;multi_doc (5) · trazab. (9)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="600" width="160" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="metrics" value="&lt;b&gt;src/eval/metrics.py&lt;/b&gt;&#xa;&#xa;Similitud coseno (fastembed)&#xa;Trazabilidad sección&#xa;Cobertura documental&#xa;Sin-respuesta flag" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="240" y="600" width="190" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="results" value="&lt;b&gt;eval/results.csv&lt;/b&gt;&#xa;&#xa;Trazabilidad sección:  74.3%&#xa;Cobertura documento:   74.3%&#xa;Factual cobertura:    100.0%&#xa;Multi-doc trazab.:    100.0%" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="600" width="220" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="note-llm" value="&lt;b&gt;Nota:&lt;/b&gt; Similitud semántica (coseno LLM) ejecutada&#xa;en Google Colab T4. CPU local (AMD iGPU Radeon 610M,&#xa;sin VRAM asignada) tarda ~2 min/pregunta.&#xa;Ver eval/sample_queries.txt para 4 respuestas reales." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=8;align=left;" parent="1" vertex="1">
+                    <mxGeometry x="750" y="595" width="340" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="gt-met" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#9673a6;" parent="1" source="gt" target="metrics" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="met-res" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#82b366;" parent="1" source="metrics" target="results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
