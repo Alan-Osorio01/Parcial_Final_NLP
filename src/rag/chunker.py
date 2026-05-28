@@ -56,9 +56,9 @@ def chunk_markdown(md_path: str, fabricante: str = "unknown") -> list[dict]:
         counter += 1
         cid = f"{doc_name}_sec{sec_num or 0}_{tipo}_{counter}"
         if sec_num is not None and sec_title:
-            texto = f"Sección {sec_num}: {sec_title}\n{content}"
+            texto = f"{doc_name} | Sección {sec_num}: {sec_title}\n{content}"
         else:
-            texto = content
+            texto = f"{doc_name}\n{content}"
         return asdict(
             Chunk(
                 chunk_id=cid,
