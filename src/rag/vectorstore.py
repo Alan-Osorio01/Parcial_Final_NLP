@@ -58,7 +58,7 @@ def dense_search(query: str, fabricante: str, n_results: int = 10) -> list[dict]
     results = collection.query(
         query_embeddings=[q_emb.tolist()],
         n_results=min(n_results, total),
-        include=["documents", "metadatas", "distances", "ids"],
+        include=["documents", "metadatas", "distances"],
     )
 
     hits = []
