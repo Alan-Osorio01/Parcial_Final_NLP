@@ -32,7 +32,7 @@ def _build_context(chunks: list[dict]) -> str:
 def generate_answer(
     query: str,
     fabricante: str,
-    k: int = 7,
+    k: int = 12,
     model: str = MODEL,
     num_predict: int = 1024,
 ) -> tuple[str, list[dict]]:
