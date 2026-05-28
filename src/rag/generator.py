@@ -2,7 +2,7 @@ import ollama
 
 from src.rag.retriever import hybrid_search
 
-MODEL = "qwen2.5:7b"
+MODEL = "qwen2.5:3b"
 
 _PROMPT = """\
 Eres un experto en Fichas de Datos de Seguridad (FDS) de productos de pintura.
