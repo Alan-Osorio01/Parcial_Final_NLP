@@ -58,16 +58,17 @@ def dense_search(query: str, fabricante: str, n_results: int = 10) -> list[dict]
     results = collection.query(
         query_embeddings=[q_emb.tolist()],
         n_results=min(n_results, total),
-        include=["documents", "metadatas", "distances"],
+        include=["documents", "metadatas", "distances", "ids"],
     )
 
     hits = []
-    for doc, meta, dist in zip(
+    for doc, meta, dist, cid in zip(
         results["documents"][0],
         results["metadatas"][0],
         results["distances"][0],
+        results["ids"][0],
     ):
-        hits.append({"texto": doc, "dense_score": float(1 - dist), **meta})
+        hits.append({"texto": doc, "dense_score": float(1 - dist), "chunk_id": cid, **meta})
     return hits
 
 
